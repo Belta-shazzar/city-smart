@@ -9,9 +9,9 @@ spring:
     #    username: shazzar
     #    password: Las-jefa5
 
-    url:
-    username:
-    password:
+    url: postgres://mqedhufikwbynd:133f7cf91f8da7d2fa577408b3dcee48bc13e57edff39f17adb25779a9e72455@ec2-3-208-79-113.compute-1.amazonaws.com:5432/dahlciq1hqmj4b
+    username: mqedhufikwbynd
+    password: 133f7cf91f8da7d2fa577408b3dcee48bc13e57edff39f17adb25779a9e72455
   jpa:
     hibernate:
       ddl-auto: update
