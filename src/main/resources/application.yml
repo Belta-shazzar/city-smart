@@ -1,0 +1,17 @@
+server:
+  error:
+    include-stacktrace: never
+    include-message: always
+
+spring:
+  datasource:
+    #    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/smart_city?useSSL=false
+    #    username: shazzar
+    #    password: Las-jefa5
+
+    url:
+    username:
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
