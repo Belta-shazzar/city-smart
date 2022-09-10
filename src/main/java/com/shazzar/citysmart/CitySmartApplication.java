@@ -10,4 +10,13 @@ public class CitySmartApplication {
         SpringApplication.run(CitySmartApplication.class, args);
     }
 
+    /*
+    TODO:
+    - add createHotel functionality
+    - add config for Cloudinary
+    - add getAllHotelForHomePage functionality (Pagination and sorting)
+    - add getAllHotel functionality (Pagination and sorting)
+    - add createUser functionality
+    */
+
 }

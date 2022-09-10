@@ -47,6 +47,9 @@ public class User {
     @ToString.Exclude
     private Set<Hotel> likedHotels;
 
+    @Column(nullable = false)
+    private Boolean isEnabled = true;
+
     public User(String firstName, String email, String password) {
         this.firstName = firstName;
         this.email = email;
