@@ -2,6 +2,7 @@ package com.shazzar.citysmart.user;
 
 import com.shazzar.citysmart.facility.feedback.Review;
 import com.shazzar.citysmart.facility.hotel.Hotel;
+import com.shazzar.citysmart.user.role.UserRole;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -36,7 +37,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    // private Role role;
+     private UserRole role;
     private LocalDateTime joinDate;
 
     @ManyToMany(mappedBy = "users", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)

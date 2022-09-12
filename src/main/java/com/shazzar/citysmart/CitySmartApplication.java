@@ -12,11 +12,12 @@ public class CitySmartApplication {
 
     /*
     TODO:
-    - add createHotel functionality
-    - add config for Cloudinary
-    - add getAllHotelForHomePage functionality (Pagination and sorting)
-    - add getAllHotel functionality (Pagination and sorting)
-    - add createUser functionality
+    - create jwt features
+    - email verification
+    - user sign in / sign up
+    - create hotel
+    - get hotels for home page (pagination and sort)
+    - get hotels for hotels page
     */
 
 }
