@@ -12,10 +12,15 @@ import com.shazzar.citysmart.facility.hotel.HotelRepo;
 import com.shazzar.citysmart.facility.hotel.model.Mapper;
 import com.shazzar.citysmart.facility.hotel.model.request.HotelRequest;
 import com.shazzar.citysmart.facility.hotel.model.response.HotelActionResponse;
+import com.shazzar.citysmart.facility.hotel.model.response.HotelHomePageResponse;
 import com.shazzar.citysmart.facility.hotel.model.response.HotelResponse;
 import com.shazzar.citysmart.user.User;
 import com.shazzar.citysmart.user.role.UserRole;
 import lombok.SneakyThrows;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,6 +55,17 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public HotelResponse getHotelById(Long hotelId) {
         return Mapper.hotelToHotelModel(getById(hotelId));
+    }
+
+    @Override
+    public List<HotelHomePageResponse> loadHomePage(Integer pageNo, Integer pageSize, String sortBy) {
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+        Page<Hotel> pageResult = hotelRepo.findAll(paging);
+        if (pageResult.hasContent()) {
+            return Mapper.hotelsToHotelModels(pageResult);
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     @Override

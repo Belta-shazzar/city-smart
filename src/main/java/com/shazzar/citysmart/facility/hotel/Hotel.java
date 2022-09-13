@@ -54,13 +54,7 @@ public class Hotel extends AuditModel {
     //    Customer's rate | Total rates | 5
     private double ratings;
 
-    @ManyToMany
-    @JoinTable(name="user_review",
-            joinColumns=
-            @JoinColumn(name="hotel_id", referencedColumnName="hotelId"),
-            inverseJoinColumns=
-            @JoinColumn(name="review_id", referencedColumnName="reviewId")
-    )
+    @OneToMany
     @ToString.Exclude
     private List<Review> review;
 

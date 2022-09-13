@@ -7,7 +7,6 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -41,7 +40,7 @@ public class User {
      private UserRole role;
     private LocalDateTime joinDate;
 
-    @ManyToMany(mappedBy = "users", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
     @ToString.Exclude
     private List<Review> reviews;
 
@@ -54,6 +53,7 @@ public class User {
 
 //TODO: Create a facility class holding a user's owned facility
     @OneToMany(mappedBy = "owner")
+    @ToString.Exclude
     private Set<Hotel> hotels;
 
     public User(String firstName, String email, String password) {

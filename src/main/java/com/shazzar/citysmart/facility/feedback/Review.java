@@ -7,7 +7,6 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -20,21 +19,16 @@ public class Review extends AuditModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;
 
+    private double customerRating;
+
     private String reviews;
 
-    @ManyToMany
-    @JoinTable(name = "user_review",
-            joinColumns =
-            @JoinColumn(name = "review_id", referencedColumnName = "reviewId"),
-            inverseJoinColumns =
-            @JoinColumn(name = "user_id", referencedColumnName = "userId")
-    )
-    @ToString.Exclude
-    private List<User> users;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private User users;
 
-    @ManyToMany(mappedBy = "review", cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @ToString.Exclude
-    private List<Hotel> hotels;
+    private Hotel hotels;
 
     @Override
     public boolean equals(Object o) {

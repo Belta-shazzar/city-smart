@@ -2,6 +2,7 @@ package com.shazzar.citysmart.facility.hotel;
 
 import com.shazzar.citysmart.facility.hotel.model.request.HotelRequest;
 import com.shazzar.citysmart.facility.hotel.model.response.HotelActionResponse;
+import com.shazzar.citysmart.facility.hotel.model.response.HotelHomePageResponse;
 import com.shazzar.citysmart.facility.hotel.model.response.HotelResponse;
 import com.shazzar.citysmart.facility.hotel.service.HotelService;
 import lombok.AllArgsConstructor;
@@ -39,5 +40,13 @@ public class HotelController {
     @GetMapping("/{hotelId}")
     public ResponseEntity<HotelResponse> getHotelById(@PathVariable("hotelId") Long hotelId) {
         return new ResponseEntity<>(hotelService.getHotelById(hotelId), HttpStatus.OK);
+    }
+
+    @GetMapping("/home-page")
+    public ResponseEntity<List<HotelHomePageResponse>> loadHomePage(@RequestParam(defaultValue = "0") Integer pageNo,
+                                                                    @RequestParam(defaultValue = "8") Integer pageSize,
+                                                                    @RequestParam(defaultValue = "likes") String sortBy) {
+        List<HotelHomePageResponse> responses = hotelService.loadHomePage(pageNo, pageSize, sortBy);
+        return new ResponseEntity<>(responses, HttpStatus.OK);
     }
 }
