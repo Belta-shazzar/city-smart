@@ -20,9 +20,6 @@ public class Review extends AuditModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;
 
-    //    Customer's rate | Total rates | 5
-    private double ratings;
-
     private String reviews;
 
     @ManyToMany

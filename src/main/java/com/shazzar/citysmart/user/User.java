@@ -52,6 +52,10 @@ public class User {
     @Column(nullable = false)
     private Boolean isEnabled = true;
 
+//TODO: Create a facility class holding a user's owned facility
+    @OneToMany(mappedBy = "owner")
+    private Set<Hotel> hotels;
+
     public User(String firstName, String email, String password) {
         this.firstName = firstName;
         this.email = email;

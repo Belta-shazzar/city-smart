@@ -6,8 +6,10 @@ import com.shazzar.citysmart.user.role.UserRole;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+@EnableJpaAuditing
 @SpringBootApplication
 public class CitySmartApplication implements CommandLineRunner {
 
@@ -49,11 +51,11 @@ public class CitySmartApplication implements CommandLineRunner {
         user4.setLastName("Tobechukwu");
         user5.setLastName("Zekke");
 
-//        repo.save(user1);
-//        repo.save(user2);
-//        repo.save(user3);
-//        repo.save(user4);
-//        repo.save(user5);
+        repo.save(user1);
+        repo.save(user2);
+        repo.save(user3);
+        repo.save(user4);
+        repo.save(user5);
 
 
     }

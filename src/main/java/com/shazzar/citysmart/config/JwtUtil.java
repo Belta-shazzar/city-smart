@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -22,7 +24,7 @@ public class JwtUtil {
     private String AUTHORITY_KEY;
     @Value("${jwt.token.validity}")
     private Long TOKEN_VALIDITY;
-    private final SecretKey KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private final SecretKey KEY = Keys.secretKeyFor(SignatureAlgorithm.HS512);
 
     public String getUserNameFromToken(String jwt) {
         return getClaimsFromToken(jwt, Claims::getSubject);
@@ -52,17 +54,18 @@ public class JwtUtil {
     }
 
     public String generateToken(UserDetails userDetails, HttpServletRequest request) {
-        String authorities = userDetails.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(", "));
+//        String authorities = userDetails.getAuthorities().stream()
+//                .map(GrantedAuthority::getAuthority)
+//                .collect(Collectors.joining(", "));
+        Map<String, Object> claims = new HashMap<>();
 
         return Jwts.builder()
+                .setClaims(claims)
                 .setIssuer(request.getRequestURL().toString())
                 .setSubject(userDetails.getUsername())
-                .claim(AUTHORITY_KEY, authorities)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + TOKEN_VALIDITY * 1000))
-                .signWith(KEY, SignatureAlgorithm.HS256)
+                .signWith(KEY, SignatureAlgorithm.HS512)
                 .compact();
     }
 

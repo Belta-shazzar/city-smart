@@ -23,4 +23,13 @@ public class AppUserService implements UserDetailsService {
         return new AppUser(user);
     }
 
+    public User getByUsername(String email) throws UsernameNotFoundException {
+        return userRepo.findByEmail(email).orElseThrow(() ->
+                new UsernameNotFoundException(String.format("user with %s %s not found", "username", email)));
+    }
+
+//    Enable saving user from a facility's service to avoid circular dependency
+    public void saveUser(User user) {
+        userRepo.save(user);
+    }
 }

@@ -6,11 +6,8 @@ import java.math.BigDecimal;
 
 @Data
 public class HotelRequest {
-    private Long hotelId;
-    private Long ownerId;
     private String hotelName;
     private String state;
-    private String LGA;
+    private String lga;
     private String address;
-    private BigDecimal pricePerNight;
 }

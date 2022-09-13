@@ -18,6 +18,7 @@ import java.util.Set;
 @Setter
 @Entity
 @ToString
+@Table(name = "hotel")
 @NoArgsConstructor
 public class Hotel extends AuditModel {
     @Id
@@ -49,6 +50,9 @@ public class Hotel extends AuditModel {
     )
     @ToString.Exclude
     private Set<User> likes;
+
+    //    Customer's rate | Total rates | 5
+    private double ratings;
 
     @ManyToMany
     @JoinTable(name="user_review",
