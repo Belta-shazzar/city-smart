@@ -8,6 +8,6 @@ import java.math.BigDecimal;
 public class HotelRequest {
     private String hotelName;
     private String state;
-    private String lga;
     private String address;
+    private BigDecimal pricePerNight;
 }

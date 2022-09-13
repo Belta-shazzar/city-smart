@@ -12,13 +12,12 @@ public class Mapper {
                 hotel.getOwner().getLastName();
         response.setOwnerName(hotelOwnerFullName);
         response.setState(hotel.getLocation().getState());
-        response.setLga(hotel.getLocation().getLga());
         response.setAddress(hotel.getLocation().getAddress());
 //        response.setFrontViewUrl(hotel.getImages().getFrontViewUrl());
 //        response.setBackViewUrl(hotel.getImages().getBackViewUrl());
 //        response.setSideViewUrl(hotel.getImages().getSideViewUrl());
-//        response.getRandomViewUrl().addAll(hotel.getImages().getRandomViewUrl());
-//        response.setPricePerNight(hotel.getPricePerNight());
+        response.setRandomViewUrl(hotel.getImages().getRandomViewUrl());
+        response.setPricePerNight(hotel.getPricePerNight());
 //        response.setLikes(hotel.getLikes().size());
 //        response.setRatings(hotel.getRatings());
 

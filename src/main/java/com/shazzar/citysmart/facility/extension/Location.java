@@ -13,6 +13,5 @@ import javax.persistence.Embeddable;
 public class Location {
 
     private String state;
-    private String lga;
     private String address;
 }

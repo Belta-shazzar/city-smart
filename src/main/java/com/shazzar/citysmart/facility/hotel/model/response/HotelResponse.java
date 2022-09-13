@@ -1,9 +1,8 @@
 package com.shazzar.citysmart.facility.hotel.model.response;
-import com.shazzar.citysmart.facility.extension.Location;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
 
 @Data
 public class HotelResponse {
@@ -13,15 +12,14 @@ public class HotelResponse {
 
 
     private String state;
-    private String lga;
     private String address;
 //    private String frontViewUrl;
 //    private String backViewUrl;
 //    private String sideViewUrl;
 //
-//    private Set<String> randomViewUrl;
+    private List<String> randomViewUrl;
 
-//    private BigDecimal pricePerNight;
+    private BigDecimal pricePerNight;
 //    private long likes;
 //    private double ratings;
 }

@@ -51,11 +51,11 @@ public class CitySmartApplication implements CommandLineRunner {
         user4.setLastName("Tobechukwu");
         user5.setLastName("Zekke");
 
-        repo.save(user1);
-        repo.save(user2);
-        repo.save(user3);
-        repo.save(user4);
-        repo.save(user5);
+//        repo.save(user1);
+//        repo.save(user2);
+//        repo.save(user3);
+//        repo.save(user4);
+//        repo.save(user5);
 
 
     }
