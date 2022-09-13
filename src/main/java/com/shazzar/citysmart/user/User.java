@@ -33,10 +33,11 @@ public class User {
     private String email;
 
     //    @Pattern()
-    @Size(min = 7, max = 12)
+//    @Size(min = 7, max = 12)
     @Column(nullable = false)
     private String password;
 
+    @Enumerated(EnumType.STRING)
      private UserRole role;
     private LocalDateTime joinDate;
 

@@ -22,4 +22,5 @@ public class AppUserService implements UserDetailsService {
                 new UsernameNotFoundException(String.format("user with %s %s not found", "username", email)));
         return new AppUser(user);
     }
+
 }

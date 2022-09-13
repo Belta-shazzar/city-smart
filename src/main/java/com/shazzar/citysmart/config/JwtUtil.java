@@ -4,7 +4,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import org.checkerframework.checker.units.qual.K;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,9 +24,22 @@ public class JwtUtil {
     private Long TOKEN_VALIDITY;
     private final SecretKey KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
+    public String getUserNameFromToken(String jwt) {
+        return getClaimsFromToken(jwt, Claims::getSubject);
+    }
 
-    public Date getExpirationFromToken() {
-        return null;
+    public boolean validateToken(String jwt, UserDetails userDetails) {
+        final String username = getUserNameFromToken(jwt);
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(jwt));
+    }
+
+    private boolean isTokenExpired(String jwt) {
+        final Date expiryDate = getExpirationFromToken(jwt);
+        return expiryDate.before(new Date());
+    }
+
+    public Date getExpirationFromToken(String jwt) {
+        return getClaimsFromToken(jwt, Claims::getExpiration);
     }
 
     public <T> T getClaimsFromToken(String token, Function<Claims, T> claimsResolver) {
@@ -35,8 +47,8 @@ public class JwtUtil {
         return claimsResolver.apply(claims);
     }
 
-    private Claims getAllClaimsFromToken(String token) {
-        return Jwts.parserBuilder().setSigningKey(KEY).build().parseClaimsJws(token).getBody();
+    private Claims getAllClaimsFromToken(String jwt) {
+        return Jwts.parserBuilder().setSigningKey(KEY).build().parseClaimsJws(jwt).getBody();
     }
 
     public String generateToken(UserDetails userDetails, HttpServletRequest request) {
@@ -53,4 +65,7 @@ public class JwtUtil {
                 .signWith(KEY, SignatureAlgorithm.HS256)
                 .compact();
     }
+
+
+
 }
