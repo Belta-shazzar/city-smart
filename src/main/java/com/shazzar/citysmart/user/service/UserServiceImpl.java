@@ -17,6 +17,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -44,6 +46,23 @@ public class UserServiceImpl implements UserService {
                 new UsernameNotFoundException(String.format("user with %s %s not found", "username", username)));
 
         return Mapper.userToUserModel(user, jwt);
+    }
+
+    @Override
+    public List<UserResponse> getAllUser() {
+        List<User> allUser = userRepo.findAll();
+        List<UserResponse> responses = new ArrayList<>();
+
+        for (User user : allUser) {
+            UserResponse response = new UserResponse();
+            response.setUserId(user.getUserId());
+            response.setFirstName(user.getFirstName());
+            response.setLastName(user.getLastName());
+            response.setEmail(user.getEmail());
+            response.setRole(user.getRole().name());
+            responses.add(response);
+        }
+        return responses;
     }
 
     @SneakyThrows

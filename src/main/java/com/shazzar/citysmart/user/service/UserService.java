@@ -4,7 +4,10 @@ import com.shazzar.citysmart.user.model.request.SignInRequest;
 import com.shazzar.citysmart.user.model.response.UserResponse;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 public interface UserService {
     UserResponse authenticateUser(SignInRequest userRequest, HttpServletRequest servletRequest);
+
+    List<UserResponse> getAllUser();
 }

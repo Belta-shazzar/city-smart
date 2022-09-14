@@ -10,8 +10,8 @@ public class Mapper {
         response.setFirstName(user.getFirstName());
         response.setLastName(user.getLastName());
         response.setEmail(user.getEmail());
-        response.setJoinDate(user.getJoinDate());
-        response.setJwt(jwt);
+//        response.setJoinDate(user.getJoinDate());
+//        response.setJwt(jwt);
         return response;
     }
 }
