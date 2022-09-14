@@ -17,4 +17,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
     }
+
+    @ExceptionHandler(AlreadyExistException.class)
+    public ResponseEntity<ErrorMessage> alreadyExistException(AlreadyExistException ex) {
+        ErrorMessage message = new ErrorMessage(HttpStatus.CONFLICT.value(), HttpStatus.CONFLICT, ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
+    }
 }

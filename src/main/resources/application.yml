@@ -15,3 +15,19 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
+jwt:
+  token:
+    prefix: Bearer
+    validity: '18000'
+  header:
+    string: Authorization
+  signing:
+    key: signingkey
+  authorities:
+    key: roles
+
+cloudinary:
+  cloud_name: shazzar-smart-city
+  api_key: '876746761995797'
+  api_secret: v0lkQHJ3I2-ZY1OsE4NLgeSEUHg

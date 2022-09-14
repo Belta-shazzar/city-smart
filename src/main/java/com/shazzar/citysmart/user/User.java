@@ -2,11 +2,11 @@ package com.shazzar.citysmart.user;
 
 import com.shazzar.citysmart.facility.feedback.Review;
 import com.shazzar.citysmart.facility.hotel.Hotel;
+import com.shazzar.citysmart.user.role.UserRole;
 import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -32,20 +32,29 @@ public class User {
     private String email;
 
     //    @Pattern()
-    @Size(min = 7, max = 12)
+//    @Size(min = 7, max = 12)
     @Column(nullable = false)
     private String password;
 
-    // private Role role;
+    @Enumerated(EnumType.STRING)
+     private UserRole role;
     private LocalDateTime joinDate;
 
-    @ManyToMany(mappedBy = "users", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
     @ToString.Exclude
     private List<Review> reviews;
 
     @ManyToMany(mappedBy = "likes", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @ToString.Exclude
     private Set<Hotel> likedHotels;
+
+    @Column(nullable = false)
+    private Boolean isEnabled = true;
+
+//TODO: Create a facility class holding a user's owned facility
+    @OneToMany(mappedBy = "owner")
+    @ToString.Exclude
+    private Set<Hotel> hotels;
 
     public User(String firstName, String email, String password) {
         this.firstName = firstName;
