@@ -3,6 +3,7 @@ package com.shazzar.citysmart.facility.hotel.service;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.shazzar.citysmart.config.userauth.AppUserService;
+import com.shazzar.citysmart.exception.AlreadyExistException;
 import com.shazzar.citysmart.exception.ResourceNotFoundException;
 import com.shazzar.citysmart.facility.FacilityUtil;
 import com.shazzar.citysmart.facility.extension.Images;
@@ -30,6 +31,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -49,7 +51,7 @@ public class HotelServiceImpl implements HotelService {
     @SneakyThrows
     public Hotel getById(Long hotelId) {
         return hotelRepo.findById(hotelId).orElseThrow(() ->
-                new ResourceNotFoundException(String.format(NOT_FOUND_ERROR_MSG, "Position", "id", hotelId)));
+                new ResourceNotFoundException(String.format(NOT_FOUND_ERROR_MSG, "Hotel", "id", hotelId)));
     }
 
     @Override
@@ -71,6 +73,7 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public HotelResponse createHotel(HotelRequest hotelRequest, Authentication authentication) {
         User user = userService.getByUsername(authentication.getName());
+        checkIfHotelNameExist(hotelRequest.getHotelName());
         Hotel hotel = new Hotel(hotelRequest.getHotelName(), user);
         hotel.setPricePerNight(hotelRequest.getPricePerNight());
 
@@ -84,6 +87,15 @@ public class HotelServiceImpl implements HotelService {
             user.setRole(UserRole.FACILITY_OWNER);
         }
         return Mapper.hotelToHotelModel(hotel);
+    }
+
+    @SneakyThrows
+    public void checkIfHotelNameExist(String hotelName) {
+        Optional<Hotel> hotel = hotelRepo.findByHotelName(hotelName);
+        if (hotel.isPresent()) {
+            throw new AlreadyExistException(String.format("%s with %s %s, already exist",
+                    "Hotel", "hotel name", hotelName));
+        }
     }
 
     @Override

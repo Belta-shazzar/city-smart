@@ -54,13 +54,12 @@ public class JwtUtil {
     }
 
     public String generateToken(UserDetails userDetails, HttpServletRequest request) {
-//        String authorities = userDetails.getAuthorities().stream()
-//                .map(GrantedAuthority::getAuthority)
-//                .collect(Collectors.joining(", "));
-        Map<String, Object> claims = new HashMap<>();
+        String authorities = userDetails.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(", "));
 
         return Jwts.builder()
-                .setClaims(claims)
+                .claim(AUTHORITY_KEY, authorities)
                 .setIssuer(request.getRequestURL().toString())
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
