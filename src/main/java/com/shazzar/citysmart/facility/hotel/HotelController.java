@@ -18,12 +18,12 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/hotel")
+@RequestMapping("/api/v1/hotels")
 public class HotelController {
 
     private final HotelService hotelService;
 
-    @PostMapping("/create-hotel")
+    @PostMapping
     @PreAuthorize("hasAnyAuthority('Role_CUSTOMER', 'Role_FACILITY_OWNER')")
     public ResponseEntity<HotelResponse> createHotel(@RequestBody HotelRequest hotelRequest, Authentication authentication) {
         return new ResponseEntity<>(hotelService.createHotel(hotelRequest, authentication), HttpStatus.CREATED);

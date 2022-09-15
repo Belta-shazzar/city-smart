@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/user")
+@RequestMapping("/api/v1/users")
 public class RegistrationController {
 
     private final UserService service;
