@@ -14,6 +14,6 @@ public class UserResponse {
     private String lastName;
     private String email;
     private String role;
-//    private LocalDateTime joinDate;
-//    private String jwt;
+    private LocalDateTime joinDate;
+    private String jwt;
 }

@@ -17,6 +17,7 @@ import java.util.Set;
 @Setter
 @ToString
 @NoArgsConstructor
+@Table(name = "app_user")
 public class User {
 
     @Id

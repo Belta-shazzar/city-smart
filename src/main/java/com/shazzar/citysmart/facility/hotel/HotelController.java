@@ -1,7 +1,7 @@
 package com.shazzar.citysmart.facility.hotel;
 
 import com.shazzar.citysmart.facility.hotel.model.request.HotelRequest;
-import com.shazzar.citysmart.facility.hotel.model.response.HotelActionResponse;
+import com.shazzar.citysmart.PublicResponse;
 import com.shazzar.citysmart.facility.hotel.model.response.HotelHomePageResponse;
 import com.shazzar.citysmart.facility.hotel.model.response.HotelResponse;
 import com.shazzar.citysmart.facility.hotel.service.HotelService;
@@ -30,10 +30,10 @@ public class HotelController {
 
     @PostMapping("/upload-images")
     @PreAuthorize("hasAuthority('Role_FACILITY_OWNER')")
-    public ResponseEntity<HotelActionResponse> uploadHotelImgFiles(@RequestParam("files")List<MultipartFile> files,
-                                                            @RequestParam("hotelId") Long hotelId,
-                                                            Authentication authentication) {
-        HotelActionResponse response = hotelService.uploadHotelFiles(files, hotelId, authentication);
+    public ResponseEntity<PublicResponse> uploadHotelImgFiles(@RequestParam("files")List<MultipartFile> files,
+                                                              @RequestParam("hotelId") Long hotelId,
+                                                              Authentication authentication) {
+        PublicResponse response = hotelService.uploadHotelFiles(files, hotelId, authentication);
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 

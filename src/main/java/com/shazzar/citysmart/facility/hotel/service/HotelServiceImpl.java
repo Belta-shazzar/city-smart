@@ -12,7 +12,7 @@ import com.shazzar.citysmart.facility.hotel.Hotel;
 import com.shazzar.citysmart.facility.hotel.HotelRepo;
 import com.shazzar.citysmart.facility.hotel.model.Mapper;
 import com.shazzar.citysmart.facility.hotel.model.request.HotelRequest;
-import com.shazzar.citysmart.facility.hotel.model.response.HotelActionResponse;
+import com.shazzar.citysmart.PublicResponse;
 import com.shazzar.citysmart.facility.hotel.model.response.HotelHomePageResponse;
 import com.shazzar.citysmart.facility.hotel.model.response.HotelResponse;
 import com.shazzar.citysmart.user.User;
@@ -99,7 +99,7 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
-    public HotelActionResponse uploadHotelFiles(List<MultipartFile> files, Long hotelId, Authentication authentication) {
+    public PublicResponse uploadHotelFiles(List<MultipartFile> files, Long hotelId, Authentication authentication) {
         User user = userService.getByUsername(authentication.getName());
         Hotel hotel = getById(hotelId);
         Images images = hotel.getImages();
@@ -112,7 +112,7 @@ public class HotelServiceImpl implements HotelService {
         }
         hotel.setImages(images);
         hotelRepo.save(hotel);
-        return new HotelActionResponse("Images uploaded successfully");
+        return new PublicResponse("Images uploaded successfully");
     }
 
     private String uploadHotelPictures(MultipartFile file) {
