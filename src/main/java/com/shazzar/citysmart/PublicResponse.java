@@ -1,10 +1,10 @@
-package com.shazzar.citysmart.facility.hotel.model.response;
+package com.shazzar.citysmart;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class HotelActionResponse {
+public class PublicResponse {
     private String message;
 }
