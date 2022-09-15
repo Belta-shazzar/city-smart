@@ -13,6 +13,7 @@ import com.shazzar.citysmart.facility.hotel.HotelRepo;
 import com.shazzar.citysmart.facility.hotel.model.Mapper;
 import com.shazzar.citysmart.facility.hotel.model.request.HotelRequest;
 import com.shazzar.citysmart.PublicResponse;
+import com.shazzar.citysmart.facility.hotel.model.request.TempRateSet;
 import com.shazzar.citysmart.facility.hotel.model.response.HotelHomePageResponse;
 import com.shazzar.citysmart.facility.hotel.model.response.HotelResponse;
 import com.shazzar.citysmart.user.User;
@@ -68,6 +69,17 @@ public class HotelServiceImpl implements HotelService {
         } else {
             return new ArrayList<>();
         }
+    }
+
+
+    @Override
+    @SneakyThrows
+    public PublicResponse updateRating(TempRateSet rateSet) {
+        Hotel hotel = hotelRepo.findById(rateSet.getHotelId()).orElseThrow(() ->
+                new ResourceNotFoundException(String.format(NOT_FOUND_ERROR_MSG, "Hotel", "id", rateSet)));
+        hotel.setRatings(rateSet.getRate());
+        hotelRepo.save(hotel);
+        return new PublicResponse(hotel.getHotelName() + " rate has been updated successfully");
     }
 
     @Override
