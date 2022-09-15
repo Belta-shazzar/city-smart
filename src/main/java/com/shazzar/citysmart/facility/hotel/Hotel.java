@@ -50,6 +50,7 @@ public class Hotel extends AuditModel {
     )
     @ToString.Exclude
     private Set<User> likes;
+//    set an int field for likes
 
     //    Customer's rate | Total rates | 5
     private double ratings;

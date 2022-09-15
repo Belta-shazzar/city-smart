@@ -2,6 +2,7 @@ package com.shazzar.citysmart.facility.hotel;
 
 import com.shazzar.citysmart.facility.hotel.model.request.HotelRequest;
 import com.shazzar.citysmart.PublicResponse;
+import com.shazzar.citysmart.facility.hotel.model.request.TempRateSet;
 import com.shazzar.citysmart.facility.hotel.model.response.HotelHomePageResponse;
 import com.shazzar.citysmart.facility.hotel.model.response.HotelResponse;
 import com.shazzar.citysmart.facility.hotel.service.HotelService;
@@ -45,8 +46,14 @@ public class HotelController {
     @GetMapping("/home-page")
     public ResponseEntity<List<HotelHomePageResponse>> loadHomePage(@RequestParam(defaultValue = "0") Integer pageNo,
                                                                     @RequestParam(defaultValue = "8") Integer pageSize,
-                                                                    @RequestParam(defaultValue = "likes") String sortBy) {
+                                                                    @RequestParam(defaultValue = "ratings") String sortBy) {
         List<HotelHomePageResponse> responses = hotelService.loadHomePage(pageNo, pageSize, sortBy);
         return new ResponseEntity<>(responses, HttpStatus.OK);
+    }
+
+//    Temporal
+    @PatchMapping("/update-rating")
+    public ResponseEntity<PublicResponse> updateRating(@RequestBody TempRateSet rateSet) {
+        return new ResponseEntity<>(hotelService.updateRating(rateSet), HttpStatus.OK);
     }
 }
