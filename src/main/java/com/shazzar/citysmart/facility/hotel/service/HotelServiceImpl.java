@@ -62,7 +62,7 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public List<HotelHomePageResponse> loadHomePage(Integer pageNo, Integer pageSize, String sortBy) {
-        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).descending());
         Page<Hotel> pageResult = hotelRepo.findAll(paging);
         if (pageResult.hasContent()) {
             return Mapper.hotelsToHotelModels(pageResult);
